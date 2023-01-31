@@ -1,0 +1,256 @@
+specVersion: 0.0.4
+description: ERC20 for Ethereum
+repository: https://github.com/armatrix/bsc-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: PositionRouter
+    network: bsc
+    source:
+      address: "0xDeA8e4910872B0761262b67CaFF365d98F7911BE"
+      abi: PositionRouter
+      startBlock: 23721659
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Trade
+        - ExecutedDecreasePosition
+        - Summary
+        - LeaderBoardAccount
+        - Position
+        - PositionKeyAccount
+        - Debug
+      abis:
+        - name: PositionRouter
+          file: ./abis/PositionRouter.json
+      eventHandlers:
+        - event: CancelDecreasePosition(indexed address,address[],address,uint256,uint256,bool,address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleCancelDecreasePosition
+        - event: CancelIncreasePosition(indexed address,address[],address,uint256,uint256,uint256,bool,uint256,uint256,uint256,uint256)
+          handler: handleCancelIncreasePosition
+        - event: CreateDecreasePosition(indexed address,address[],address,uint256,uint256,bool,address,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleCreateDecreasePosition
+        - event: CreateIncreasePosition(indexed address,address[],address,uint256,uint256,uint256,bool,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleCreateIncreasePosition
+        - event: ExecuteDecreasePosition(indexed address,address[],address,uint256,uint256,bool,address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleExecuteDecreasePosition
+      file: ./src/Trades.ts
+  - kind: ethereum/contract
+    name: OrderBook
+    network: bsc
+    source:
+      address: "0xf08a5cc5f9432f684a30e9aade3d51a516b56178"
+      abi: OrderBook
+      startBlock: 23721652
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Trade
+      abis:
+        - name: OrderBook
+          file: ./abis/OrderBook.json
+      eventHandlers:
+        - event: CancelDecreaseOrder(indexed address,uint256,address,uint256,address,uint256,bool,uint256,bool,uint256)
+          handler: handleCancelDecreaseOrder
+        - event: CancelIncreaseOrder(indexed address,uint256,address,uint256,address,address,uint256,bool,uint256,bool,uint256)
+          handler: handleCancelIncreaseOrder
+        # - event: CancelSwapOrder(indexed address,uint256,address[],uint256,uint256,uint256,bool,bool,uint256)
+        #   handler: handleCancelSwapOrder
+        - event: CreateDecreaseOrder(indexed address,uint256,address,uint256,address,uint256,bool,uint256,bool,uint256)
+          handler: handleCreateDecreaseOrder
+        - event: CreateIncreaseOrder(indexed address,uint256,address,uint256,address,address,uint256,bool,uint256,bool,uint256)
+          handler: handleCreateIncreaseOrder
+      file: ./src/Trades.ts
+  - kind: ethereum/contract
+    name: Router
+    network: bsc
+    source:
+      address: "0x6F9AaE42c4bfa604f91795dD50aEd643766aFb84"
+      abi: Router
+      startBlock: 23721551
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Trade
+      abis:
+        - name: Router
+          file: ./abis/Router.json
+      eventHandlers:
+        - event: Swap(address,address,address,uint256,uint256)
+          handler: handleSwap
+      file: ./src/Trades.ts
+  - kind: ethereum/contract
+    name: Vault
+    network: bsc
+    source:
+      address: "0x7f90C8De425e2E21F6d152e881713DE5Fe37dEAB"
+      abi: Vault
+      startBlock: 23721543
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Liquidation
+        - ClosedPosition
+        - Summary
+        - LeaderBoardAccount
+        - IncreasePosition
+        - DecreasePosition
+        - PositionKeyAccount
+        - Trade
+        - Position
+        - Pnl
+        - IndependentUser
+        - User
+      abis:
+        - name: Vault
+          file: ./abis/Vault.json
+      eventHandlers:
+        - event: LiquidatePosition(bytes32,address,address,address,bool,uint256,uint256,uint256,int256,uint256)
+          handler: handleLiquidatePosition
+        - event: IncreasePosition(bytes32,address,address,address,uint256,uint256,bool,uint256,uint256)
+          handler: handleIncreasePosition
+        - event: ClosePosition(bytes32,address,uint256,uint256,uint256,uint256,uint256,int256)
+          handler: handleClosePosition
+        - event: DecreasePosition(bytes32,address,address,address,uint256,uint256,bool,uint256,uint256,uint256,uint256,uint256)
+          handler: handleDecreasePosition
+        - event: UpdatePnl(bytes32,bool,uint256,uint256,uint256,uint256,uint256)
+          handler: handleUpdatePnl
+        - event: UpdatePosition(bytes32,address,uint256,uint256,uint256,uint256,uint256,int256,uint256)
+          handler: handleUpdatePosition
+        - event: Swap(address,address,address,uint256,uint256,uint256,uint256)
+          handler: handleSwap
+      file: ./src/ranking.ts
+  - kind: ethereum/contract
+    name: PositionRouter_elp2
+    network: bsc
+    source:
+      address: "0xb8cF970D76E473973b8DA6FD1A4B9294a5C49c81"
+      abi: PositionRouter
+      startBlock: 25202974
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Trade
+        - ExecutedDecreasePosition
+        - Summary
+        - LeaderBoardAccount
+        - Position
+        - PositionKeyAccount
+        - Debug
+      abis:
+        - name: PositionRouter
+          file: ./abis/PositionRouter.json
+      eventHandlers:
+        - event: CancelDecreasePosition(indexed address,address[],address,uint256,uint256,bool,address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleCancelDecreasePosition
+        - event: CancelIncreasePosition(indexed address,address[],address,uint256,uint256,uint256,bool,uint256,uint256,uint256,uint256)
+          handler: handleCancelIncreasePosition
+        - event: CreateDecreasePosition(indexed address,address[],address,uint256,uint256,bool,address,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleCreateDecreasePosition
+        - event: CreateIncreasePosition(indexed address,address[],address,uint256,uint256,uint256,bool,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleCreateIncreasePosition
+        - event: ExecuteDecreasePosition(indexed address,address[],address,uint256,uint256,bool,address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleExecuteDecreasePosition
+      file: ./src/Trades.ts
+  - kind: ethereum/contract
+    name: OrderBook_elp2
+    network: bsc
+    source:
+      address: "0x80E1BbAddAb5A13Cc1d6954041B9002986Ec24C8"
+      abi: OrderBook
+      startBlock: 25202968
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Trade
+      abis:
+        - name: OrderBook
+          file: ./abis/OrderBook.json
+      eventHandlers:
+        - event: CancelDecreaseOrder(indexed address,uint256,address,uint256,address,uint256,bool,uint256,bool,uint256)
+          handler: handleCancelDecreaseOrder
+        - event: CancelIncreaseOrder(indexed address,uint256,address,uint256,address,address,uint256,bool,uint256,bool,uint256)
+          handler: handleCancelIncreaseOrder
+        # - event: CancelSwapOrder(indexed address,uint256,address[],uint256,uint256,uint256,bool,bool,uint256)
+        #   handler: handleCancelSwapOrder
+        - event: CreateDecreaseOrder(indexed address,uint256,address,uint256,address,uint256,bool,uint256,bool,uint256)
+          handler: handleCreateDecreaseOrder
+        - event: CreateIncreaseOrder(indexed address,uint256,address,uint256,address,address,uint256,bool,uint256,bool,uint256)
+          handler: handleCreateIncreaseOrder
+      file: ./src/Trades.ts
+  - kind: ethereum/contract
+    name: Router_elp2
+    network: bsc
+    source:
+      address: "0x7569dF80D47321f2bAFEDba0De5302761940eeC9"
+      abi: Router
+      startBlock: 25202963
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Trade
+      abis:
+        - name: Router
+          file: ./abis/Router.json
+      eventHandlers:
+        - event: Swap(address,address,address,uint256,uint256)
+          handler: handleSwap
+      file: ./src/Trades.ts
+  - kind: ethereum/contract
+    name: Vault_elp2
+    network: bsc
+    source:
+      address: "0x2c7077cF9bd07C3BC45B4E5b8C27f8B95c6550B3"
+      abi: Vault
+      startBlock: 25202958
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Liquidation
+        - ClosedPosition
+        - Summary
+        - LeaderBoardAccount
+        - IncreasePosition
+        - DecreasePosition
+        - PositionKeyAccount
+        - Trade
+        - Position
+        - Pnl
+        - IndependentUser
+        - User
+      abis:
+        - name: Vault
+          file: ./abis/Vault.json
+      eventHandlers:
+        - event: LiquidatePosition(bytes32,address,address,address,bool,uint256,uint256,uint256,int256,uint256)
+          handler: handleLiquidatePosition
+        - event: IncreasePosition(bytes32,address,address,address,uint256,uint256,bool,uint256,uint256)
+          handler: handleIncreasePosition
+        - event: ClosePosition(bytes32,address,uint256,uint256,uint256,uint256,uint256,int256)
+          handler: handleClosePosition
+        - event: DecreasePosition(bytes32,address,address,address,uint256,uint256,bool,uint256,uint256,uint256,uint256,uint256)
+          handler: handleDecreasePosition
+        - event: UpdatePnl(bytes32,bool,uint256,uint256,uint256,uint256,uint256)
+          handler: handleUpdatePnl
+        - event: UpdatePosition(bytes32,address,uint256,uint256,uint256,uint256,uint256,int256,uint256)
+          handler: handleUpdatePosition
+        - event: Swap(address,address,address,uint256,uint256,uint256,uint256)
+          handler: handleSwap
+      file: ./src/ranking.ts

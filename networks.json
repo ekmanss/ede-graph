@@ -1,0 +1,13 @@
+{
+  "bsc": {
+    "Vault": {
+      "address": "0x7f90C8De425e2E21F6d152e881713DE5Fe37dEAB"
+    },
+    "Router": {
+      "address": "0x6F9AaE42c4bfa604f91795dD50aEd643766aFb84"
+    },
+    "PositionRouter": {
+      "address": "0xDeA8e4910872B0761262b67CaFF365d98F7911BE"
+    }
+  }
+}

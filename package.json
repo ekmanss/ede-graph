@@ -1,0 +1,22 @@
+{
+  "name": "ede-graph",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ aaronlux/ede-graph",
+    "deploy-bsc": "graph deploy --product hosted-service metaverseblock/ede_graph_elp2",
+    "create-local": "graph create --node http://localhost:8020/ aaronlux/ede-graph",
+    "remove-local": "graph remove --node http://localhost:8020/ aaronlux/ede-graph",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 aaronlux/ede-graph subgraph.local.yaml",
+    "product": "graph deploy --product hosted-service aaronlux/ede-graph",
+    "test": "graph test"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.33.1",
+    "@graphprotocol/graph-ts": "0.27.0"
+  },
+  "devDependencies": {
+    "matchstick-as": "0.5.0"
+  }
+}
